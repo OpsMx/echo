@@ -49,6 +49,7 @@ class SlackNotificationService implements NotificationService {
 
   @Override
   EchoResponse.Void handle(Notification notification) {
+    log.info("handling slack notification to ${notification.to}")
     log.debug("Handling Slack notification to ${notification.to}")
     def subject = notificationTemplateEngine.build(notification, NotificationTemplateEngine.Type.SUBJECT)
     def text = notificationTemplateEngine.build(notification, NotificationTemplateEngine.Type.BODY)
@@ -56,8 +57,10 @@ class SlackNotificationService implements NotificationService {
       def response
       String address = it
       if (slack.config.sendCompactMessages) {
+        log.info("sending compact message to slack")
         response = slack.sendCompactMessage(new CompactSlackMessage(text), address, true)
       } else {
+        log.info("sending interactive message to slack ")
         response = slack.sendMessage(
           new SlackAttachment(subject, text, (InteractiveActions)notification.interactiveActions),
           address, true)
