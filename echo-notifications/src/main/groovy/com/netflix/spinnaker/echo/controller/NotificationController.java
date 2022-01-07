@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.val;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -44,6 +46,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @AllArgsConstructor
 public class NotificationController {
+  private static final Logger LOG = LoggerFactory.getLogger(NotificationController.class);
+
   @Autowired(required = false)
   Collection<NotificationService> notificationServices;
 
@@ -101,6 +105,7 @@ public class NotificationController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<String> processCallback(
       @PathVariable String source, RequestEntity<String> request) {
+    LOG.info("Calling call back ");
     return interactiveNotificationCallbackHandler.processCallback(source, request);
   }
 

@@ -82,7 +82,7 @@ class InteractiveNotificationCallbackHandler {
    * @param request The request received from the notification service
    */
   ResponseEntity<String> processCallback(final String source, RequestEntity<String> request) {
-    log.debug("Received interactive notification callback request from " + source);
+    log.info("Received interactive notification callback request from " + source);
 
     InteractiveNotificationService notificationService = getNotificationService(source);
 
@@ -95,7 +95,7 @@ class InteractiveNotificationCallbackHandler {
 
     SpinnakerService spinnakerService = getSpinnakerService(callback.getServiceId());
 
-    log.debug("Routing notification callback to originating service " + callback.getServiceId());
+    log.info("Routing notification callback to originating service " + callback.getServiceId());
 
     // TODO(lfp): error handling (retries?). I'd like to respond to the message in a thread, but
     //  have been unable to make that work. Troubleshooting with Slack support.
