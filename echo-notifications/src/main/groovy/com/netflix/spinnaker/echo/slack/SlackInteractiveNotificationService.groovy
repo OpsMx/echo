@@ -119,7 +119,8 @@ class SlackInteractiveNotificationService extends SlackNotificationService imple
     log.info("Slack user payload ${payload.user}")
     String user = payload.user.name
     try {
-      SlackService.SlackUserInfo userInfo = slackAppService.getUserInfo(payload.user.id)
+      log.info("user id ${payload.user.id}")
+      SlackService.SlackUserInfo userInfo = slackAppService.getUserInfo(payload.user.id, false)
       log.info("user info :$userInfo.name")
       log.info("user info :${userInfo.getEmail()}")
       user = userInfo.email
