@@ -2,7 +2,6 @@ FROM docker.io/opsmx11/echo:custnotification
 MAINTAINER sig-platform@spinnaker.io
 COPY echo-web/build/install/echo /opt/echo
 USER root
-RUN apt-get update && apt-get -y install openjdk-8-jdk
 RUN apt-get -y install  wget vim curl
 RUN adduser --disabled-login --system spinnaker
 RUN mkdir -p /opt/echo/plugins && chown -R spinnaker:nogroup /opt/echo/plugins
