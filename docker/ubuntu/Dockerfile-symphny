@@ -1,12 +1,8 @@
 FROM docker.io/opsmx11/echo:custnotification
-MAINTAINER sig-platform@spinnaker.io
+LABEL maintainer="sig-platform@spinnaker.io"
+RUN apt-get update && apt-get -y install openjdk-11-jre-headless wget
+RUN adduser --system --uid 10111 --group spinnaker
 COPY echo-web/build/install/echo /opt/echo
-USER root
-RUN apt-get update && apt-get -y install wget 
-RUN apt-get -y install curl
-RUN apt-get -y install vim
-RUN apt-get -y install openjdk-8-jre-headless
-USER spinnaker
-RUN adduser --disabled-login --system spinnaker
 RUN mkdir -p /opt/echo/plugins && chown -R spinnaker:nogroup /opt/echo/plugins
+USER spinnaker
 CMD ["/opt/echo/bin/echo"]
