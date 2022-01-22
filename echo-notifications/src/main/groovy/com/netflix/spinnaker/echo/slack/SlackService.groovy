@@ -32,10 +32,13 @@ class SlackService {
   SlackLegacyProperties config
 
   Response sendCompactMessage(CompactSlackMessage message, String channel, boolean asUser) {
+    log.info("sending message ${message.getBody()} to channel ${channel}")
     slackClient.sendMessage(config.token, message.buildMessage(), channel, asUser, config.expandUserNames ? 1 : 0)
   }
 
   Response sendMessage(SlackAttachment message, String channel, boolean asUser) {
+    log.info("sending message ${message.getText()} to channel ${channel}")
+    log.info("is webhook enabled ${config.useIncomingWebhook}")
     config.useIncomingWebhook ?
       slackClient.sendUsingIncomingWebHook(config.token, new SlackRequest([message], channel)) :
       slackClient.sendMessage(config.token, toJson(message), channel, asUser, config.expandUserNames ? 1 : 0)
