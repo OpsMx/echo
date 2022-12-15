@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/ubi9:9.1.0
+FROM registry.access.redhat.com/ubi9:9.1.0
 MAINTAINER sig-platform@spinnaker.io
 COPY echo-web/build/install/echo /opt/echo
 RUN yum -y install java-11-openjdk-headless.x86_64 wget vim curl net-tools nettle
