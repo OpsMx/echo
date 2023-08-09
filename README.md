@@ -206,5 +206,10 @@ Some of the key metrics are listed below:
     `echo` logs should provide additional information as to the cause of the issue
 
 
+$${\color{lightblue} Recent \space commits:}$$ 
+
+              CommitID                   |   Author      | Commit Message          | Commit Date
+----------------------------------------------------------------------------------------------------
+
 
 a339c01afdf18971a552fa5659f994a0c79fa861 | Yugandharkumar | Create commits-preserve.yml | 2023-08-09 
