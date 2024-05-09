@@ -73,6 +73,6 @@ public interface TriggerEventHandler<T extends TriggerEvent> {
   }
 
   default boolean isUnstableTriggerEvent(T event) {
-    return true;
+    return false;
   }
 }
