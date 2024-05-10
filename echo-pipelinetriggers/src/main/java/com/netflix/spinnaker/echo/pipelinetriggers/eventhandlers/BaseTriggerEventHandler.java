@@ -77,6 +77,7 @@ public abstract class BaseTriggerEventHandler<T extends TriggerEvent>
 
     List<Pipeline> pipelines = new ArrayList<>();
     if (successfulTriggerEvent) {
+      log.debug("successfulTriggerEvent - BaseTriggerEventHandler");
       pipelines =
           supportedTriggerTypes().stream()
               .flatMap(
@@ -95,6 +96,7 @@ public abstract class BaseTriggerEventHandler<T extends TriggerEvent>
     }
 
     if (unstableTriggerEvent) {
+      log.debug("unstableTriggerEvent - BaseTriggerEventHandler");
       pipelines =
           (Optional.ofNullable(triggers.get(JENKINS_TRIGGER_TYPE))
                   .orElse(Collections.emptyList())
@@ -108,6 +110,7 @@ public abstract class BaseTriggerEventHandler<T extends TriggerEvent>
               .distinct()
               .collect(Collectors.toList());
     }
+    log.debug("pipelinesData" + pipelines);
     log.debug("End of the get matching Pipelines - BaseTriggerEventHandler");
     return pipelines;
   }
