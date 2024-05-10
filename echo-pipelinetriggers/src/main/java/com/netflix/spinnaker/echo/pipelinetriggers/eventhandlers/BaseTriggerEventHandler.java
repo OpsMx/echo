@@ -158,7 +158,9 @@ public abstract class BaseTriggerEventHandler<T extends TriggerEvent>
   }
 
   protected boolean canAccessApplication(Trigger trigger) {
+    log.info("*******Start of the canAccessApplication - BaseTriggerEventHandler ");
     String runAsUser = trigger.getRunAsUser();
+    log.info("******* runAsuser :{}", runAsUser);
     if (runAsUser == null) {
       runAsUser = "anonymous";
     }
@@ -168,6 +170,7 @@ public abstract class BaseTriggerEventHandler<T extends TriggerEvent>
         AuthenticatedRequest.allowAnonymous(
             () ->
                 fiatPermissionEvaluator.hasPermission(user, application, "APPLICATION", "EXECUTE"));
+    log.info("******* hasPermission :{}", hasPermission);
     if (!hasPermission) {
       log.info(
           "The user '{}' does not have access to execute pipelines in the application '{}', skipped triggering of pipeline '{}'.",
@@ -183,6 +186,7 @@ public abstract class BaseTriggerEventHandler<T extends TriggerEvent>
           "pipeline",
           trigger.getParent().getName());
     }
+    log.info("*******End of the canAccessApplication - BaseTriggerEventHandler ");
     return hasPermission;
   }
 
