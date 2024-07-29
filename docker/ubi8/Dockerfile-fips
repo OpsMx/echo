@@ -4,7 +4,7 @@ COPY echo-web/build/install/echo /opt/echo
 RUN yum -y install java-11-openjdk-devel wget vim curl net-tools nettle
 RUN yum -y update
 RUN adduser spinnaker
-SERVICE_PLUGIN_PATH /opt/echo/plugins
+ENV SERVICE_PLUGIN_PATH=/opt/echo/plugins
 RUN mkdir -p ${SERVICE_PLUGIN_PATH}
 
 #custom plugin zip files adding
