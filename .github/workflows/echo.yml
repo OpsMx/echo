@@ -30,11 +30,11 @@ jobs:
       id: build_variables
       run: |
           echo ::set-output name=REPO::"ubi8-oes-echo"
-          echo ::set-output name=VERSION::"1.28.4_2.34.4"
+          echo ::set-output name=VERSION::"1.28.4"
           #echo ::set-output name=VERSION::"$(git rev-parse --short HEAD)-$(date --utc +'%Y%m%d%H%M')"
           #echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           #echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
-          echo  ::set-output name=CTAG::"patch1"
+          echo  ::set-output name=CTAG::"_2.34.4_4.0.3.1-patch1"
     - name: Build
       run: ./gradlew --no-daemon echo-web:installDist -x test
     - name: Login to Quay
