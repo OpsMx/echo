@@ -4,7 +4,8 @@ COPY echo-web/build/install/echo /opt/echo
 RUN yum -y install java-11-openjdk-devel wget vim curl net-tools nettle
 RUN yum -y update
 RUN adduser spinnaker
-RUN mkdir -p /opt/echo/plugins
+SERVICE_PLUGIN_PATH /opt/echo/plugins
+RUN mkdir -p ${SERVICE_PLUGIN_PATH}
 
 #custom plugin zip files adding
 
@@ -18,7 +19,7 @@ ENV CUSTOMPLUGIN_RELEASEORG=$CUSTOMPLUGIN_RELEASEORG
 RUN wget -O Opsmx.EchoEventPlugin-EchoEventPlugin-${CUSTOMPLUGIN_RELEASE_VERSION}.zip -c https://github.com/${CUSTOMPLUGIN_RELEASEORG}/Customplugins/releases/download/v${CUSTOMPLUGIN_RELEASEVERSION_PLUGIN}/EchoEventPlugin-v${CUSTOMPLUGIN_RELEASE_VERSION}-SNAPSHOT.zip -P ${SERVICE_PLUGIN_PATH}
 RUN mv Opsmx.EchoEventPlugin-EchoEventPlugin-${CUSTOMPLUGIN_RELEASE_VERSION}.zip ${SERVICE_PLUGIN_PATH}
 
-RUN chmod -R 777 /opt/echo/plugins/
+RUN chmod -R 777 ${SERVICE_PLUGIN_PATH}
 RUN chown -R spinnaker:spinnaker /opt/
 USER spinnaker
 CMD ["/opt/echo/bin/echo"]
