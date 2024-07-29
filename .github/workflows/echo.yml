@@ -49,11 +49,16 @@ jobs:
         #if: startsWith(github.repository, ‘yugaa22/‘)
       uses: docker/build-push-action@v2
       with:
-        context: .
-        file: docker/ubi8/Dockerfile
-        push: true
-        tags: |
-          "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.CTAG }}"
+          build-args: |
+            CUSTOMPLUGIN_RELEASEVERSION_PLUGIN=4.0.4.2-rc5
+            CUSTOMPLUGIN_RELEASEORG=opsmx
+            CUSTOMPLUGIN_RELEASEREPO=armory-observability-plugin
+            CUSTOMPLUGIN_RELEASE_VERSION=1.0.1
+          context: .
+          file: docker/ubi8/Dockerfile-fips
+          push: true
+          tags: |
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.CTAG }}"
     
     - id: get-build-name
       run: |
