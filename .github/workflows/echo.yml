@@ -57,9 +57,9 @@ jobs:
           file: docker/ubi8/Dockerfile-fips
           push: true
           tags: |
-            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.CTAG }}"
+            "${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}${{ steps.build_variables.outputs.CTAG }}"
     
     - id: get-build-name
       run: |
-            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}-${{ steps.build_variables.outputs.CTAG }}
+            imageName=${{ env.CONTAINER_REGISTRY }}/${{ steps.build_variables.outputs.REPO }}:${{ steps.build_variables.outputs.VERSION }}${{ steps.build_variables.outputs.CTAG }}
             echo "oes=$imageName" >> $GITHUB_OUTPUT
