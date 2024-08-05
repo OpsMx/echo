@@ -7,7 +7,7 @@ env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Xmx6g -Xms6g
   CONTAINER_REGISTRY: quay.io/opsmxpublic
 jobs:
-  build-clouddriver:
+  build-echo:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout echo repo
