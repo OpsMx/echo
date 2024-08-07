@@ -15,7 +15,7 @@ jobs:
     - name: Checkout echo repo
       uses: actions/checkout@v3
       ###with:
-        #repository: opsmx/echo
+        ##repository: opsmx/echo
         #ref: refs/heads/master
     - uses: actions/setup-java@v3
       with:
