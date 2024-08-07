@@ -108,19 +108,12 @@ public class ManualEventHandler implements TriggerEventHandler<ManualEvent> {
     log.debug("Start of the get matching Pipelines - ManualTriggerEventHandler");
     boolean unstableTriggerEvent = isUnstableTriggerEvent(event);
     boolean successfulTriggerEvent = isSuccessfulTriggerEvent(event);
-    if (!unstableTriggerEvent || !successfulTriggerEvent) {
+    if (!unstableTriggerEvent && !successfulTriggerEvent) {
       return Collections.emptyList();
     }
     List<Pipeline> pipelines = new ArrayList<>();
-    if (successfulTriggerEvent) {
-      pipelines =
-          pipelineCache.getPipelinesSync().stream()
-              .map(p -> withMatchingTrigger(event, p))
-              .filter(Optional::isPresent)
-              .map(Optional::get)
-              .collect(Collectors.toList());
-    }
-    if (unstableTriggerEvent && isJenkinsBuildTriggerAndUnstableBuild(event)) {
+    if (successfulTriggerEvent
+        || (unstableTriggerEvent && isJenkinsBuildTriggerAndUnstableBuild(event))) {
       pipelines =
           pipelineCache.getPipelinesSync().stream()
               .map(p -> withMatchingTrigger(event, p))
