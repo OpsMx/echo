@@ -33,7 +33,7 @@ jobs:
           #echo ::set-output name=VERSION::"$(git rev-parse --short HEAD)-$(date --utc +'%Y%m%d%H%M')"
           #echo "::set-output name=GITHASH::$(git rev-parse --short HEAD)"
           #echo "::set-output name=BUILDDATE::$(date -u +"%Y%m%d%H%M")"
-          echo  ::set-output name=CTAG::"2.34.4-mar20-23-patch2"
+          echo  ::set-output name=CTAG::"2.34.4-mar20-23-patch1"
     - name: Build
       run: ./gradlew --no-daemon echo-web:installDist -x test
     - name: Login to Quay
